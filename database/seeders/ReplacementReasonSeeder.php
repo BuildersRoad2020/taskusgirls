@@ -21,7 +21,8 @@ class ReplacementReasonSeeder extends Seeder
             ['id' => '3','name' => 'Media player has no Power '],
             ['id' => '4','name' => 'Media Player does not POST'],                        
             ['id' => '5','name' => 'Faulty CMOS/BIOS'],     
-            ['id' => '6','name' => 'Faulty Videocard'],                       
+            ['id' => '6','name' => 'Faulty Videocard'],      
+            ['id' => '7','name' => 'Faulty Hardware'],                    
         ];
 
         foreach($reasons as $reason) {

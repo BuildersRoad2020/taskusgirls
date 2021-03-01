@@ -23,7 +23,8 @@ class ApplicationSeeder extends Seeder
             ['id' => '5','name' => 'Eze Impress'],     
             ['id' => '6','name' => 'MRH Kiosk'],     
             ['id' => '7','name' => 'Telstra Pricer'],  
-            ['id' => '8','name' => 'Urban Circus'],                                                        
+            ['id' => '8','name' => 'Urban Circus'],   
+            ['id' => '9','name' => 'Menuboard'],                                                         
         ];
 
         foreach($reasons as $reason) {

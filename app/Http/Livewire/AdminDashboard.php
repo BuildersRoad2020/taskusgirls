@@ -2,17 +2,21 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Application;
+use App\Models\DeviceType;
 use App\Models\FaultyUnitReturn;
+use App\Models\HardwareReplacement;
 use Livewire\Component;
 use App\Models\Tasks;
 use App\Models\TaskType;
 use App\Models\InvoiceRequest;
+use App\Models\ReplacementReason;
 use App\Models\SiteAddress;
+use App\Models\SolutionType;
 use App\Models\TechnicianRequest;
 use App\Models\WarrantyRepair;
 use App\Models\User;
-
-
+use Facade\IgnitionContracts\Solution;
 use Livewire\WithPagination;
 
 class AdminDashboard extends Component
@@ -137,6 +141,62 @@ class AdminDashboard extends Component
     public $emailTR;
     public $addressTR;
 
+    //Hardware Replacement Form
+
+public $HRwarranty;
+public $HRquote;
+public $HRdevice_disposal;
+public $HRdevice_name;
+public $HRdevice_type;
+public $HRLTstatus;
+public $HRissue;
+public $HRreason;
+public $HRconnection_type;
+public $HRwifi_name;
+public $HRwifi_password;
+public $HRnetwork_type;
+public $HRIP;
+public $HRsubnet;
+public $HRDG;
+public $HRDNS;
+public $HRDNS2;
+public $HR7Eleven;
+public $HRstore_id;
+public $HRpostcode;
+public $HRpasscode;
+public $HRapplication;
+public $HRmatrox;
+public $HRsolution_type;
+public $HRorientation;
+public $HRscreen_model;
+public $HRserial_number;
+public $HRend;
+public $HRnetwork_device_type;
+public $HRprojector_model;
+public $HRprojector_lamp;
+public $HRnotes;
+public $HRL2;
+public $HRperson;
+public $HRphone;
+public $HRemail;
+public $HRaddress;
+
+//HR Modals
+public $HRModal = false;
+public $HRwarrantybind = false;
+public $HRdevice_typebind1 = false;
+    public $HRdevice_typebind1sub = false;
+public $HRdevice_typebind2 = false;
+    
+public $HRdevice_typebind3 = false;
+    
+public $HRdevice_typebind4 = false;
+    
+public $HRconnection_typebind = false;    
+public $HRnetwork_typebind = false;
+public $HRApplicationbind = false;
+
+
 
 
     // public $rules = [
@@ -171,6 +231,10 @@ class AdminDashboard extends Component
         return view('livewire.admin-dashboard', [
             'tasks' => $tasks,
             'tasktypes' => TaskType::orderBy('name')->get(),
+            'devicetypes' => DeviceType::orderBy('name')->get(),
+            'replacementreasons' => ReplacementReason::orderBy('name')->get(),
+            'applications' => Application::orderBy('name')->get(),
+            'solutiontypes' => SolutionType::orderBy('name')->get(),
         ]);
     }
 
@@ -496,7 +560,99 @@ class AdminDashboard extends Component
             $this->reset('job');
             $this->reset('issue');
             
-         } 
+         }
+         
+         else if ($validatedData['task_id'] == 1) {
+            // $this->site = true;
+             $this->HRModal = true;
+             
+             $validatedHardwareReplacement = $this->validate([
+                'HRwarranty' => ['required'],
+                'HRquote' => ['required_if:HRwarranty,0'], 
+                'HRdevice_disposal' => ['required'],
+                'HRdevice_name' => ['required'],
+                'HRdevice_type' => ['required'],
+                'HR7Eleven' => ['required_if:HRdevice_type, 1'],
+                'HRstore_id' => ['required_if:HR7Eleven,1'],
+                'HRpostcode' => ['required_if:HR7Eleven,1'],
+                'HRpasscode' => ['required_if:HR7Eleven,1'],
+                'HRscreen_model' => ['required_if:HRdevice_type,2'],
+                'HRserial_number' => ['required_if:HRdevice_type,2'],
+                'HRend' => ['required_if:HRdevice_type,2'],
+                'HRnetwork_device_type' => ['required_if:HRdevice_type,3'],
+                'HRprojector_model' => ['required_if:HRdevice_type,4'],
+                'HRprojector_lamp' => ['required_if:HRdevice_type,4'],
+                'HRLTstatus' => ['required'],
+                'HRissue' => ['required'],
+                'HRreason' => ['required'],
+                'HRconnection_type' =>  ['required'],
+                'HRwifi_name' => ['required_if:HRconnection_type,1'],
+                'HRwifi_password' => ['required_if:HRconnection_type,1'],
+                'HRnetwork_type' =>  ['required_if:HRdevice_type ,1'],
+                'HRIP' => ['required_if:HRnetwork_type,1'],
+                'HRsubnet' => ['required_if:HRnetwork_type,1'],
+                'HRDG'  => ['required_if:HRnetwork_type,1'],
+                'HRDNS' => ['required_if:HRnetwork_type,1'],
+                'HRDNS2'  => ['required_if:HRnetwork_type,1'],
+                'HRapplication'  =>  ['required'],
+                'HRmatrox' => ['required_if:HRapplication,9'],
+                'HRsolution_type' => ['required'],
+                'HRorientation' => ['required'],
+                'HRnotes' => ['required'],
+                'HRL2'  => ['required'],
+                'HRphone' => ['required'],
+                'HRemail' => ['required'],
+                'HRaddress' => ['required'],
+                'HRperson' => ['required'],
+       
+            ]);
+
+            $task->save();
+            $address = new SiteAddress;
+            $address->person = $validatedHardwareReplacement['HRperson'];
+            $address->phone = $validatedHardwareReplacement['HRphone'];
+            $address->email = $validatedHardwareReplacement['HRemail'];
+            $address->address = $validatedHardwareReplacement['HRaddress'];
+            $address->save();
+            $hardwarereplacement = new HardwareReplacement;
+            $hardwarereplacement->warranty = $validatedHardwareReplacement['HRwarranty'];
+            $hardwarereplacement->quote = $validatedHardwareReplacement['HRquote'];
+            $hardwarereplacement->device_disposal = $validatedHardwareReplacement['HRdevice_disposal'];
+            $hardwarereplacement->device_name = $validatedHardwareReplacement['HRdevice_name'];
+            $hardwarereplacement->device_type = $validatedHardwareReplacement['HRdevice_type'];
+            $hardwarereplacement->SevenEleven =  $validatedHardwareReplacement['HR7Eleven'];
+            $hardwarereplacement->store_id = $validatedHardwareReplacement['HRstore_id'];
+            $hardwarereplacement->postcode  = $validatedHardwareReplacement['HRpostcode'];
+            $hardwarereplacement->passcode = $validatedHardwareReplacement['HRpasscode'];
+            $hardwarereplacement->screen_model = $validatedHardwareReplacement['HRscreen_model'];
+            $hardwarereplacement->serial_number =  $validatedHardwareReplacement['HRserial_number'];
+            $hardwarereplacement->end =  $validatedHardwareReplacement['HRend'];
+            $hardwarereplacement->network_device_type =  $validatedHardwareReplacement['HRnetwork_device_type'];
+            $hardwarereplacement->projector_model =  $validatedHardwareReplacement['HRprojector_model'];
+            $hardwarereplacement->projector_lamp =  $validatedHardwareReplacement['HRprojector_lamp'];
+            $hardwarereplacement->LTstatus = $validatedHardwareReplacement['HRLTstatus'];
+            $hardwarereplacement->issue = $validatedHardwareReplacement['HRissue'];
+            $hardwarereplacement->reason = $validatedHardwareReplacement['HRreason'];
+            $hardwarereplacement->connection_type = $validatedHardwareReplacement['HRconnection_type'];
+            $hardwarereplacement->wifi_name = $validatedHardwareReplacement['HRwifi_name'];
+            $hardwarereplacement->wifi_password = $validatedHardwareReplacement['HRwifi_password'];
+            $hardwarereplacement->network_type = $validatedHardwareReplacement['HRnetwork_type'];            
+            $hardwarereplacement->IP = $validatedHardwareReplacement['HRIP'];     
+            $hardwarereplacement->subnet = $validatedHardwareReplacement['HRsubnet'];   
+            $hardwarereplacement->DG = $validatedHardwareReplacement['HRDG'];   
+            $hardwarereplacement->DNS = $validatedHardwareReplacement['HRDNS'];   
+            $hardwarereplacement->DNS2 = $validatedHardwareReplacement['HRDNS2'];       
+            $hardwarereplacement->application = $validatedHardwareReplacement['HRapplication'];  
+            $hardwarereplacement->matrox = $validatedHardwareReplacement['HRmatrox'];  
+            $hardwarereplacement->solution_type = $validatedHardwareReplacement['HRsolution_type'];       
+            $hardwarereplacement->orientation = $validatedHardwareReplacement['HRorientation'];         
+            $hardwarereplacement->L2 = $validatedHardwareReplacement['HRL2'];   
+            $hardwarereplacement->notes = $validatedHardwareReplacement['HRnotes'];   
+            $hardwarereplacement->tasks_id = $task->id;    
+            $hardwarereplacement->address = $address->id;  
+            $hardwarereplacement->save();
+            $this->HRModal = true;
+         }
  
 
         $this->confirmAdd = false;
