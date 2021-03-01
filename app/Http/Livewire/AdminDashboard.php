@@ -78,7 +78,19 @@ class AdminDashboard extends Component
     public $IRQuote;  
 
     /*TR */
-
+    public $TRView;
+    public $TRPerson;
+    public $TRPhone;
+    public $TREmail;
+    public $TRWarrantyView;
+    public $TRQuote;
+    public $TRDevice_Disposal;
+    public $TRDevice_Name;
+    public $TRLTStatus;
+    public $TRTechs_Required;
+    public $TRJob;
+    public $TRIssue;
+    public $TRAddress;
 
     //Site Address form
     public $person;
@@ -187,14 +199,14 @@ class AdminDashboard extends Component
        $FUR = FaultyUnitReturn::where('tasks_id', $caseID->id)->pluck('id')->first();
        $WR = WarrantyRepair::where('tasks_id', $caseID->id)->pluck('id')->first();
        $IR = InvoiceRequest::where('tasks_id', $caseID->id)->pluck('id')->first();
-       $TR = TechnicianRequest::where('tasks_id', $caseID->id)->pluck('id')->first();
+       $TRView = TechnicianRequest::where('tasks_id', $caseID->id)->pluck('id')->first();
 
       // dd($FUR);
 
        $this->FUR = $FUR;
        $this->WR = $WR;
        $this->IR = $IR;
-       $this->TR = $TR;
+       $this->TRView = $TRView;
 
        if ($FUR != null) {
    
@@ -217,7 +229,7 @@ class AdminDashboard extends Component
            $this->WRSerial = $WRid->serial;
            $this->WRStart = $WRid->start;
            $this->WREnd = $WRid->end;
-           $this->WRAddress = $WRid->Address;
+           $this->WRAddress = SiteAddress::where('id', $WRid->Address)->pluck('address')->first();    
            $this->WRL2 = $WRid->L2;
            $this->WRPerson = SiteAddress::where('id', $WRid->Address)->pluck('person')->first();
            $this->WRPhone = SiteAddress::where('id', $WRid->Address)->pluck('phone')->first();
@@ -228,6 +240,22 @@ class AdminDashboard extends Component
            $IRid = InvoiceRequest::where('id',$IR)->first();
            $this->IRRFQ = $IRid->RFQ;
            $this->IRQuote = $IRid->quote;
+       }
+
+       if ($TRView != null) {
+           $TRid = TechnicianRequest::where('id',$TRView)->first();
+           $this->TRPerson = SiteAddress::where('id', $TRid->Address)->pluck('person')->first();
+           $this->TRPhone = SiteAddress::where('id', $TRid->Address)->pluck('phone')->first();
+           $this->TREmail = SiteAddress::where('id', $TRid->Address)->pluck('email')->first();  
+           $this->TRAddress = SiteAddress::where('id', $TRid->Address)->pluck('address')->first();  
+           $this->TRWarrantyView = $TRid->warranty;
+           $this->TRQuote = $TRid->quote;
+           $this->TRDevice_Disposal = $TRid->device_disposal;
+           $this->TRDevice_Name = $TRid->device_name;
+           $this->TRLTStatus = $TRid->LTstatus;
+           $this->TRTechs_Required = $TRid->techs_required;
+           $this->TRJob = $TRid->job;
+           $this->TRIssue = $TRid->issue;
        }
 
       $this->viewCase = Tasks::where('id', $caseID->id)->pluck('case')->first();
@@ -407,10 +435,11 @@ class AdminDashboard extends Component
             $this->reset('address');
             $this->reset('notes');
             $this->site = false;
+            $this->unitreturn = false;
         }
 
         else if ($validatedData['task_id'] == 2) {
-            $this->site = true;
+           // $this->site = true;
             $this->TR = true;
 
             $validatedTechRequest = $this->validate([
@@ -452,6 +481,20 @@ class AdminDashboard extends Component
             $techrequest->issue = $validatedTechRequest['issue'];
             $techrequest->tasks_id = $task->id;
             $techrequest->save();
+            $this->TR = false;
+            $this->TRWarranty = false;
+            $this->reset('personTR');
+            $this->reset('phoneTR');
+            $this->reset('emailTR');
+            $this->reset('addressTR');
+            $this->reset('warranty');
+            $this->reset('quoteTR');
+            $this->reset('device_disposal');
+            $this->reset('device_name');
+            $this->reset('LTstatus');
+            $this->reset('techs_required');
+            $this->reset('job');
+            $this->reset('issue');
             
          } 
  

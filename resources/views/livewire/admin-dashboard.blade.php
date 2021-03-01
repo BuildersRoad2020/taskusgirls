@@ -270,7 +270,7 @@
 
                             <div class="px-2 w-auto flex-auto">
                                 <x-jet-label for="emailTR" value="{{ __('Email Address') }}" />
-                                <x-jet-input id="emailTR" class="block mt-1 w-full" type="emailTR" name="emailTR" required wire:model.defer="emailTR" />
+                                <x-jet-input id="emailTR" class="block mt-1 w-full" type="email" name="emailTR" required wire:model.defer="emailTR" />
                                 <x-jet-input-error for="emailTR" class="mt-2" />
                             </div>
 
@@ -459,6 +459,80 @@
                                     </div>
 
                                     <hr class="mt-2 mb-2">
+
+                                    @if ($TRView != null)
+
+                                    <div class="flex flex-wrap justify-between">
+                                        <div class="sm:grid sm:grid-cols-3 sm:gap-2 sm:px-6">
+                                            <dt class="text-sm font-medium text-gray-500"> Issue Reported: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$TRIssue}} </dd>
+                                            <dt class="text-sm font-medium text-gray-500"> Device Name: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$TRDevice_Name}} </dd>
+                                            <dt class="text-sm font-medium text-gray-500"> LT Status: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">
+                                            
+                                            @if($TRLTStatus == 0)
+                                            <span class="bg-red-100 text-red-600 text-xs font-semibold rounded-2xl py-1 px-4"> Offline </span>
+                                            @endif                                      
+
+                                            @if($TRLTStatus == 1)
+                                            <span class="bg-green-100 text-green-600 text-xs font-semibold rounded-2xl py-1 px-4"> Online </span>
+                                            @endif
+
+                                            @if($TRLTStatus == 2)
+                                            <span class="bg-blue-100 text-blue-600 text-xs font-semibold rounded-2xl py-1 px-4"> N/A </span>
+                                            @endif
+                                            </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> Contact: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$TRPerson}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> Phone: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$TRPhone}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> Email: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$TREmail}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> Address: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$TRAddress}} </dd>
+                                        </div>
+
+                                        <div class="sm:grid sm:grid-cols-3 mt-2 sm:gap-2 sm:px-6">
+
+                                        @if($TRWarrantyView == 0)
+                                            <dt class="text-sm font-medium text-gray-500"> Warranty</dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> 
+                                            <span class="bg-red-100 text-red-600 text-xs font-semibold rounded-2xl py-1 px-4">
+                                            No </span>
+                                            </dd> 
+                                            <dt class="text-sm font-medium text-gray-500"> Quote</dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$TRQuote}} </dd>  
+                                            @endif
+
+                                        @if($TRDevice_Disposal != 2)
+                                            <dt class="text-sm font-medium text-gray-500"> Device Disposal</dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> 
+                                            
+                                            @if($TRDevice_Disposal == 0)
+                                            <span class="bg-blue-100 text-blue-600 text-xs font-semibold rounded-2xl py-1 px-4">
+                                            Store  </span> @endif
+
+                                            @if($TRDevice_Disposal == 1)
+                                            <span class="bg-red-100 text-red-600 text-xs font-semibold rounded-2xl py-1 px-4">
+                                            Engagis </span> @endif
+                                            
+                                            </dd> 
+                                            @endif
+
+                                            <dt class="text-sm font-medium text-gray-500"> Techs Required </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$TRTechs_Required}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> Job Required </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$TRJob}} </dd>
+                                        </div>
+                                    </div>
+
+                                    @endif
 
                                     @if ($FUR != null)
                                     <div class="flex flex-wrap justify-between">
