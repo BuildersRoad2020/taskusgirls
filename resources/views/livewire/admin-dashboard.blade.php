@@ -1,5 +1,5 @@
 <div>
-    <div class="flex flex-col max-w-full overflow-x-hidden shadow-md m-8" wire:poll.5000ms>
+    <div class="flex flex-col max-w-full overflow-x-hidden shadow-md m-8">
 
         @if(session()->has('message'))
         <div class="fixed top-0 right-0 bg-opacity-0 ">
@@ -113,7 +113,7 @@
 
                     <div class="w-full py-1" x-data="{ warrantyrepair: @entangle('warrantyrepair') }">
 
-                        <div class="flex flex-wrap py-1" x-show="warrantyrepair" @click.away="warrantyrepair = false">
+                        <div class="flex flex-wrap py-1" x-show="warrantyrepair">
 
                             <div class="px-2 w-auto">
                                 <x-jet-label for="reason" value="{{ __('Warranty Repair Reason') }}" />
@@ -470,10 +470,10 @@
                                             <dt class="text-sm font-medium text-gray-500"> Email: </dt>
                                             <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$FUREmail}} </dd>
 
-                                            <dt class="text-sm font-medium text-gray-500"> Address </dt>
+                                            <dt class="text-sm font-medium text-gray-500"> Address: </dt>
                                             <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$FURAddressComplete}} </dd>
 
-                                            <dt class="text-sm font-medium text-gray-500"> Notes </dt>
+                                            <dt class="text-sm font-medium text-gray-500"> Notes: </dt>
                                             <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$FURNotes}} </dd>
                                         </div>
                                     </div>

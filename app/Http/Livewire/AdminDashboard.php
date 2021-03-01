@@ -184,10 +184,12 @@ class AdminDashboard extends Component
        $this->View = $id;
        $caseID = Tasks::where('id', $id)->first();
 
-       $FUR = FaultyUnitReturn::where('tasks_id', $caseID->task_types_id)->pluck('id')->first();
-       $WR = WarrantyRepair::where('tasks_id', $caseID->task_types_id)->pluck('id')->first();
-       $IR = InvoiceRequest::where('tasks_id', $caseID->task_types_id)->pluck('id')->first();
-       $TR = TechnicianRequest::where('tasks_id', $caseID->task_types_id)->pluck('id')->first();
+       $FUR = FaultyUnitReturn::where('tasks_id', $caseID->id)->pluck('id')->first();
+       $WR = WarrantyRepair::where('tasks_id', $caseID->id)->pluck('id')->first();
+       $IR = InvoiceRequest::where('tasks_id', $caseID->id)->pluck('id')->first();
+       $TR = TechnicianRequest::where('tasks_id', $caseID->id)->pluck('id')->first();
+
+      // dd($FUR);
 
        $this->FUR = $FUR;
        $this->WR = $WR;
@@ -291,7 +293,7 @@ class AdminDashboard extends Component
 
     public function AddTask()
     {
-
+      
         $validatedData =  $this->validate(
             [
                 'case' => ['required'],
@@ -362,6 +364,7 @@ class AdminDashboard extends Component
             $warranty->tasks_id = $task->id;
             $warranty->save();
             $this->warrantyrepair = false;
+            $this->site = false;
             $this->reset('reason');
             $this->reset('software');
             $this->reset('firmware');
@@ -403,6 +406,7 @@ class AdminDashboard extends Component
             $this->reset('email');
             $this->reset('address');
             $this->reset('notes');
+            $this->site = false;
         }
 
         else if ($validatedData['task_id'] == 2) {
@@ -428,30 +432,29 @@ class AdminDashboard extends Component
                 'job' => ['required'],
                 'issue' => ['required'],
             ]);
-            
-            $validatedUnitReturn = $this->validate([
 
-            ]);
-        } 
-        $task->save();
-        $address = new SiteAddress;
-        $address->person = $validatedTechRequest['personTR'];
-        $address->phone = $validatedTechRequest['phoneTR'];
-        $address->email = $validatedTechRequest['emailTR'];
-        $address->address = $validatedTechRequest['addressTR'];
-        $address->save();
-        $techrequest = new TechnicianRequest;
-        $techrequest->warranty = $validatedTechRequest['warranty'];
-        $techrequest->quote = $validatedTechRequest['quoteTR'];
-        $techrequest->device_disposal = $validatedTechRequest['device_disposal'];
-        $techrequest->device_name = $validatedTechRequest['device_name'];
-        $techrequest->LTstatus = $validatedTechRequest['LTstatus'];
-        $techrequest->techs_required = $validatedTechRequest['techs_required'];
-        $techrequest->job = $validatedTechRequest['job'];
-        $techrequest->address = $address->id;
-        $techrequest->issue = $validatedTechRequest['issue'];
-        $techrequest->tasks_id = $task->id;
-        $techrequest->save();
+            $task->save();
+            $address = new SiteAddress;
+            $address->person = $validatedTechRequest['personTR'];
+            $address->phone = $validatedTechRequest['phoneTR'];
+            $address->email = $validatedTechRequest['emailTR'];
+            $address->address = $validatedTechRequest['addressTR'];
+            $address->save();
+            $techrequest = new TechnicianRequest;
+            $techrequest->warranty = $validatedTechRequest['warranty'];
+            $techrequest->quote = $validatedTechRequest['quoteTR'];
+            $techrequest->device_disposal = $validatedTechRequest['device_disposal'];
+            $techrequest->device_name = $validatedTechRequest['device_name'];
+            $techrequest->LTstatus = $validatedTechRequest['LTstatus'];
+            $techrequest->techs_required = $validatedTechRequest['techs_required'];
+            $techrequest->job = $validatedTechRequest['job'];
+            $techrequest->address = $address->id;
+            $techrequest->issue = $validatedTechRequest['issue'];
+            $techrequest->tasks_id = $task->id;
+            $techrequest->save();
+            
+         } 
+ 
 
         $this->confirmAdd = false;
         $this->reset('store');
