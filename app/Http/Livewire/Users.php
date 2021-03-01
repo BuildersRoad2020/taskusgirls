@@ -34,9 +34,7 @@ class Users extends Component
 
     public function UserAdd() 
     {
-        $this->reset('name');
-        $this->reset('email');
-        $this->reset('roles_id');
+
         $validatedData = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
