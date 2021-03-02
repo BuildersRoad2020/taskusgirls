@@ -95,6 +95,7 @@ class AdminDashboard extends Component
     public $TRJob;
     public $TRIssue;
     public $TRAddress;
+    public $TRL2;
 
     //Site Address form
     public $person;
@@ -368,6 +369,7 @@ public $HRApplicationbind = false;
            $this->TRTechs_Required = $TRid->techs_required;
            $this->TRJob = $TRid->job;
            $this->TRIssue = $TRid->issue;
+           $this->TRL2 = $TRid->L2;
        }
 
       $this->viewCase = Tasks::where('id', $caseID->id)->pluck('case')->first();
@@ -572,6 +574,7 @@ public $HRApplicationbind = false;
                 'techs_required' => ['required', 'numeric'],
                 'job' => ['required'],
                 'issue' => ['required'],
+                'TRL2' => ['required'],
             ]);
 
             $task->save();
@@ -591,6 +594,7 @@ public $HRApplicationbind = false;
             $techrequest->job = $validatedTechRequest['job'];
             $techrequest->address = $address->id;
             $techrequest->issue = $validatedTechRequest['issue'];
+            $techrequest->L2 = $validatedTechRequest['TRL2'];
             $techrequest->tasks_id = $task->id;
             $techrequest->save();
             $this->TR = false;

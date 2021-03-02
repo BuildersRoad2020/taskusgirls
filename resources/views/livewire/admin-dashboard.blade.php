@@ -586,6 +586,20 @@
                                         <x-jet-input-error for="addressTR" class="mt-2" />
                                     </div>
 
+                                    <div class="px-2 w-auto">
+                                    <x-jet-label for="TRL2" value="{{ __('L2 Approver') }}" />
+                                    <select id="TRL2" class="mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="TRL2" required wire:model.defer="TRL2" />
+                                    <option value="Dinesh Lama"> Dinesh Lama </option>
+                                    <option value="Emee Casas"> Emee Casas </option>
+                                    <option value="Keziah Cababaros"> Keziah Cababaros</option>
+                                    <option value="Melvin Dacut"> Melvin Dacut </option>
+                                    <option value="Naila Casino"> Naila Casino </option>
+                                    <option value="Samir Bastola "> Samir Bastola </option>
+                                    <option value="Wendell Segundo"> Wendell Segundo </option>
+                                    </select>
+                                    <x-jet-input-error for="TRL2" class="mt-2" />
+                                 </div>
+
 
                                 </div>
 
@@ -801,6 +815,9 @@
 
                                             <dt class="text-sm font-medium text-gray-500"> Address: </dt>
                                             <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$TRAddress}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> L2 Approver: </dt> 
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$TRL2}} </dd>
                                         </div>
 
                                         <div class="sm:grid sm:grid-cols-3 mt-2 sm:gap-2 sm:px-6">

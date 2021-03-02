@@ -19,5 +19,6 @@ class TechnicianRequest extends Model
         'job',
         'issue',
         'Address',
+        'L2',
     ];
 }
