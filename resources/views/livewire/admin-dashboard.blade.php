@@ -907,9 +907,9 @@
                                             @endif
 
                                             <dt class="text-sm font-medium text-gray-500"> Network Type: </dt>
-                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRnetwork_type == 0 ? 'Static': 'DHCP' }} </dd>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRnetwork_type == 0 ? 'DHCP': 'Static' }} </dd>
 
-                                            @if($HRnetwork_type == 0)
+                                            @if($HRnetwork_type == 1)
                                             <dt class="text-sm font-medium text-gray-500"> IP Address: </dt>
                                             <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRIP}} </dd>
                                             <dt class="text-sm font-medium text-gray-500"> Subnet Mask: </dt>
