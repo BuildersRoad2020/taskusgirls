@@ -17,11 +17,13 @@
         </div>
         @endif
 
+        @can('viewAny', App\Models\User::class)
         <div class="flex flex-wrap justify-end">
             <div class="m-2 space-x-1 space-y-1">
                 <button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white transition bg-blue-700 rounded-full shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none" wire:click="confirmUserAdd" wire:loading.attr="disabled"> Add User </button>
             </div>
         </div>
+        @endcan
 
         <table class="overflow-x-auto w-full bg-white">
             <thead class="bg-blue-100 border-b border-gray-300">
