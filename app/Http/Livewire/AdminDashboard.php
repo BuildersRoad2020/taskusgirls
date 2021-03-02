@@ -181,6 +181,9 @@ public $HRphone;
 public $HRemail;
 public $HRaddress;
 
+//HR View
+public $HRView;
+
 //HR Modals
 public $HRModal = false;
 public $HRwarrantybind = false;
@@ -264,6 +267,7 @@ public $HRApplicationbind = false;
        $WR = WarrantyRepair::where('tasks_id', $caseID->id)->pluck('id')->first();
        $IR = InvoiceRequest::where('tasks_id', $caseID->id)->pluck('id')->first();
        $TRView = TechnicianRequest::where('tasks_id', $caseID->id)->pluck('id')->first();
+       $HRView = HardwareReplacement::where('tasks_id', $caseID->id)->pluck('id')->first();
 
       // dd($FUR);
 
@@ -271,6 +275,50 @@ public $HRApplicationbind = false;
        $this->WR = $WR;
        $this->IR = $IR;
        $this->TRView = $TRView;
+       $this->HRView = $HRView;
+
+       if($HRView !=null) {
+
+        $id = HardwareReplacement::where('id',$HRView)->first();
+
+        $this->HRwarranty = $id->warranty;
+        $this->HRquote = $id->quote;
+        $this->HRdevice_disposal = $id->device_disposal;
+        $this->HRdevice_name = $id->device_name;
+        $this->HRdevice_type = DeviceType::where('id', $id->device_type)->pluck('name')->first();
+        $this->HRLTstatus = $id->LTstatus;
+        $this->HRissue = $id->issue;
+        $this->HRreason = ReplacementReason::where('id', $id->reason)->pluck('name')->first();
+        $this->HRconnection_type = $id->connection_type;
+        $this->HRwifi_name = $id->wifi_name;
+        $this->HRwifi_password = $id->wifi_password;
+        $this->HRnetwork_type = $id->network_type;
+        $this->HRIP = $id->IP;
+        $this->HRsubnet = $id->subnet;
+        $this->HRDG = $id->DG;
+        $this->HRDNS = $id->DNS;
+        $this->HRDNS2 = $id->DNS2;
+        $this->HR7Eleven = $id->SevenEleven;
+        $this->HRstore_id = $id->store_id;
+        $this->HRpostcode = $id->postcode;
+        $this->HRpasscode = $id->passcode;
+        $this->HRapplication = Application::where('id', $id->application)->pluck('name')->first();
+        $this->HRmatrox = $id->matrox;
+        $this->HRsolution_type = SolutionType::where('id', $id->solution_type)->pluck('name')->first();
+        $this->HRorientation = $id->orientation;
+        $this->HRscreen_model = $id->screen_model;
+        $this->HRserial_number = $id->serial_number;
+        $this->HRend = $id->end;
+        $this->HRnetwork_device_type = $id->network_device_type;
+        $this->HRprojector_model = $id->projector_model;
+        $this->HRprojector_lamp = $id->projector_lamp;
+        $this->HRnotes = $id->notes;
+        $this->HRL2 = $id->L2;
+        $this->HRperson = SiteAddress::where('id', $id->Address)->pluck('person')->first();
+        $this->HRphone = SiteAddress::where('id', $id->Address)->pluck('phone')->first();
+        $this->HRemail = SiteAddress::where('id', $id->Address)->pluck('email')->first();
+        $this->HRaddress = SiteAddress::where('id', $id->Address)->pluck('address')->first();
+       }
 
        if ($FUR != null) {
    
@@ -567,23 +615,23 @@ public $HRApplicationbind = false;
              $this->HRModal = true;
              
              $validatedHardwareReplacement = $this->validate([
-                'HRwarranty' => ['required'],
-                'HRquote' => ['required_if:HRwarranty,0'], 
-                'HRdevice_disposal' => ['required'],
-                'HRdevice_name' => ['required'],
-                'HRdevice_type' => ['required'],
-                'HR7Eleven' => ['required_if:HRdevice_type, 1'],
-                'HRstore_id' => ['required_if:HR7Eleven,1'],
-                'HRpostcode' => ['required_if:HR7Eleven,1'],
-                'HRpasscode' => ['required_if:HR7Eleven,1'],
-                'HRscreen_model' => ['required_if:HRdevice_type,2'],
-                'HRserial_number' => ['required_if:HRdevice_type,2'],
-                'HRend' => ['required_if:HRdevice_type,2'],
-                'HRnetwork_device_type' => ['required_if:HRdevice_type,3'],
-                'HRprojector_model' => ['required_if:HRdevice_type,4'],
-                'HRprojector_lamp' => ['required_if:HRdevice_type,4'],
-                'HRLTstatus' => ['required'],
-                'HRissue' => ['required'],
+                'HRwarranty' => ['required'], //
+                'HRquote' => ['required_if:HRwarranty,0'],  //
+                'HRdevice_disposal' => ['required'], //
+                'HRdevice_name' => ['required'], //
+                'HRdevice_type' => ['required'], //
+                'HR7Eleven' => ['required_if:HRdevice_type, 1'], //
+                'HRstore_id' => ['required_if:HR7Eleven,1'], //
+                'HRpostcode' => ['required_if:HR7Eleven,1'],//
+                'HRpasscode' => ['required_if:HR7Eleven,1'], //
+                'HRscreen_model' => ['required_if:HRdevice_type,2'], //
+                'HRserial_number' => ['required_if:HRdevice_type,2'], //
+                'HRend' => ['required_if:HRdevice_type,2'], //
+                'HRnetwork_device_type' => ['required_if:HRdevice_type,3'], //
+                'HRprojector_model' => ['required_if:HRdevice_type,4'], //
+                'HRprojector_lamp' => ['required_if:HRdevice_type,4'], //
+                'HRLTstatus' => ['required'], //
+                'HRissue' => ['required'], //
                 'HRreason' => ['required'],
                 'HRconnection_type' =>  ['required'],
                 'HRwifi_name' => ['required_if:HRconnection_type,1'],

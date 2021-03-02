@@ -840,6 +840,147 @@
 
                                     @endif
 
+                                    @if($HRView != null)
+
+                                    <div class="flex flex-wrap justify-between">
+                                        <div class="sm:grid sm:grid-cols-3 sm:gap-2 sm:px-6">
+                                            @if($HRwarranty == 0)
+                                            <dt class="text-sm font-medium text-gray-500"> Device in Warranty: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> 
+                                            <span class="bg-red-100 text-red-600 text-xs font-semibold rounded-2xl py-1 px-4"> {{$HRquote}} </span>  </dd>
+                                            @endif
+                                      
+                                            @if($HRdevice_disposal == 0)
+                                            <dt class="text-sm font-medium text-gray-500"> Device Disposal: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">
+                                            <span class="bg-blue-100 text-blue-600 text-xs font-semibold rounded-2xl py-1 px-4">
+                                             Store </dd>
+                                            @endif
+
+                                            @if($HRdevice_disposal == 1)
+                                            <dt class="text-sm font-medium text-gray-500"> Device Disposal: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">
+                                            <span class="bg-red-100 text-red-600 text-xs font-semibold rounded-2xl py-1 px-4">
+                                             Engagis </dd>
+                                            @endif
+
+                                            <dt class="text-sm font-medium text-gray-500"> Device Name: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRdevice_name}} </dd>
+                                        
+                                            <dt class="text-sm font-medium text-gray-500"> Device Type: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRdevice_type}} </dd>
+
+                                            @if($HR7Eleven == 1)
+                                            <dt class="text-sm font-medium text-gray-500"> 7-Eleven Player: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> Yes </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> Store ID: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRstore_id}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> POSTCODE: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRpostcode}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> PASSCODE: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRpasscode}} </dd>                                     
+                                            @endif
+
+                                            @if($HRLTstatus != 2)
+                                            <dt class="text-sm font-medium text-gray-500"> LT Status: </dt>                  
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">   {{$HRLTstatus == 0 ? 'Offline' : 'Online'}}  </dd>
+                                            @endif
+                                           
+                                            <dt class="text-sm font-medium text-gray-500"> Issue Reported: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRissue}} </dd>
+                                            
+                                            <dt class="text-sm font-medium text-gray-500"> Replacement Reason: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRreason}} </dd>
+                                            
+                                            <dt class="text-sm font-medium text-gray-500"> Connection Type: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRconnection_type == 0 ? 'Wired' : 'Wireless'}} </dd>
+
+                                            @if($HRconnection_type == 1)
+                                            <dt class="text-sm font-medium text-gray-500"> Wifi Name: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRwifi_name}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> Wifi Password: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRwifi_password}} </dd>
+                                            @endif
+
+                                            <dt class="text-sm font-medium text-gray-500"> Network Type: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRnetwork_type == 0 ? 'Static': 'DHCP' }} </dd>
+
+                                            @if($HRnetwork_type == 0)
+                                            <dt class="text-sm font-medium text-gray-500"> IP Address: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRIP}} </dd>
+                                            <dt class="text-sm font-medium text-gray-500"> Subnet Mask: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRsubnet}} </dd>
+                                            <dt class="text-sm font-medium text-gray-500"> Default Gateway: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRDG}} </dd>
+                                            <dt class="text-sm font-medium text-gray-500"> DNS 1: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRDNS}} </dd>
+                                            <dt class="text-sm font-medium text-gray-500"> DNS 2:  </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRDNS2}} </dd>
+                                            @endif
+
+                                            <dt class="text-sm font-medium text-gray-500"> Application: </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRapplication}} </dd>
+
+                                            @if($HRmatrox == 1)
+                                            <dt class="text-sm font-medium text-gray-500"> Include Matrox? </dt>
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">  <span class="bg-red-100 text-red-600 text-xs font-semibold rounded-2xl py-1 px-4">Yes </span></dd>
+                                            @endif
+
+                                            <dt class="text-sm font-medium text-gray-500"> Solution Type: </dt>                          
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRsolution_type}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> Orientation: </dt> 
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRorientation == 0 ? 'Landscape' : 'Portrait'}} </dd>
+                                            
+                                            @if($HRdevice_type == 2)
+                                            <dt class="text-sm font-medium text-gray-500"> Screen Model: </dt> 
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{HRscreen_model}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> Serial Number: </dt> 
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{HRserial_number}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> Warranty End Date: </dt> 
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{HRend}} </dd>
+                                            @endif
+
+                                            @if($HRdevice_type == 3)
+                                            <dt class="text-sm font-medium text-gray-500"> Network Device Type: </dt> 
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRnetwork_device_type}} </dd>
+                                            @endif
+
+                                            @if($HRdevice_type == 4)
+                                            <dt class="text-sm font-medium text-gray-500"> Projector Model: </dt> 
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$projector_model}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> Projector Lamp: </dt> 
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$projector_lamp}} </dd>
+                                            @endif
+
+                                            <dt class="text-sm font-medium text-gray-500"> Notes: </dt> 
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRnotes}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> L2 Approver: </dt> 
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRL2}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> Site Contact: </dt> 
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRperson}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> Phone: </dt> 
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRphone}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> Email </dt> 
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRemail}} </dd>
+
+                                            <dt class="text-sm font-medium text-gray-500"> Address </dt> 
+                                            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$HRaddress}} </dd>
+                                        </div>
+                                    </div>
+                                     @endif
+
                                     @if ($FUR != null)
                                     <div class="flex flex-wrap justify-between">
                                         <div class="sm:grid sm:grid-cols-3 sm:gap-2 sm:px-6">
