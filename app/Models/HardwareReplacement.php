@@ -46,5 +46,6 @@ class HardwareReplacement extends Model
             'notes',
             'Address',
             'L2',
+            'support_types_id',
     ];
 }

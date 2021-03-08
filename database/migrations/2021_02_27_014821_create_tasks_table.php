@@ -15,11 +15,12 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('case');
+            $table->string('casenumber');
             $table->string('store');
             $table->foreignId('task_types_id')->references('id')->on('task_types')->cascadeOnDelete();              
             $table->foreignId('users_id')->references('id')->on('users')->cascadeOnDelete();  
             $table->integer('admin')->nullable();
+            $table->longText('Notes')->nullable();              
             $table->boolean('status')->default('0')->nullable();
             $table->timestamps();
         });

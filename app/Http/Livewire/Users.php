@@ -23,7 +23,7 @@ class Users extends Component
     {
     
         return view('livewire.users', [
-            'users' => User::with('RoleUser')->get(),
+            'users' => User::with('RoleUser')->orderBy('name')->paginate(12),
         ]);
     }
 

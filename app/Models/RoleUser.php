@@ -20,4 +20,5 @@ class RoleUser extends Model
     public function Roles() {
         $this->belongsToMany(Roles::class);
     }
+
 }

@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class InvoiceRequest extends Model
+class ReturnAuthorization extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'name',
         'tasks_id',
-        'RFQ',
-        'quote',
-    ];    
+        'serial_number',
+    ];
+
+
 }

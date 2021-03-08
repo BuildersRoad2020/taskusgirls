@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHardwareReplacementsTable extends Migration
+class CreateSOwithTechesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateHardwareReplacementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('hardware_replacements', function (Blueprint $table) {
+        Schema::create('s_owith_teches', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tasks_id')->references('id')->on('tasks')->cascadeOnDelete();    
+            $table->foreignId('support_types_id')->references('id')->on('support_types')->cascadeOnDelete();              
             $table->boolean('warranty');       
             $table->string('quote')->nullable();    
             $table->boolean('device_disposal'); 
@@ -50,7 +51,10 @@ class CreateHardwareReplacementsTable extends Migration
             $table->longText('notes');
             $table->foreignId('Address')->references('id')->on('site_addresses')->cascadeOnDelete();  
             $table->string('L2');
-
+            $table->boolean('display_status')->default('0');
+            $table->tinyInteger('techs_required')->nullable();
+            $table->longText('job');
+            $table->longText('tools');
             $table->timestamps();
         });
     }
@@ -62,6 +66,6 @@ class CreateHardwareReplacementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hardware_replacements');
+        Schema::dropIfExists('s_owith_teches');
     }
 }

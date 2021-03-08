@@ -14,11 +14,16 @@ class TechnicianRequest extends Model
         'quote',
         'device_disposal',
         'device_name',
+        'device_type',
         'LTstatus',
         'techs_required',
         'job',
         'issue',
         'Address',
         'L2',
+        'support_types_id',
+        'tools',
+        'display_status',
+
     ];
 }

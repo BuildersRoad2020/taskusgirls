@@ -20,7 +20,9 @@ class TaskTypeSeeder extends Seeder
             ['id' => '2','name' => 'Technician Request'],
             ['id' => '3','name' => 'Faulty Unit Return'],
             ['id' => '4','name' => 'Warranty Repair'],                        
-            ['id' => '5','name' => 'Invoice Request']             
+            ['id' => '5','name' => 'Invoice Request'],        
+            ['id' => '6','name' => 'Hardware Replacement with Tech'],      
+            ['id' => '7','name' => 'Return Authorization'],                               
         ];
 
         foreach($tasktypes as $task) {

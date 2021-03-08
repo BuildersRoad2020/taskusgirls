@@ -687,8 +687,8 @@
             <tbody class="text-gray-600 text-sm divide-y divide-gray-300">
                 <tr class="bg-white font-medium text-sm divide-y divide-gray-200">
                     @foreach($tasks as $task)
-                    <td class="p-4 whitespace-nowrap"> {{$task->created_at }}</td>
-                    <td class="p-4 whitespace-nowrap">{{$task->case }}</td>
+                    <td class="p-4 whitespace-nowrap"> {{$task->created_at }} </td>
+                    <td class="p-4 whitespace-nowrap">{{$task->casenumber }}</td>
                     <td class="p-4 whitespace-nowrap">{{$task->store }}</td>
                     <td class="p-4 whitespace-nowrap">{{$task->TaskType->name }}</td>
                     <td class="p-4 whitespace-nowrap">{{$task->user->name }}</td>

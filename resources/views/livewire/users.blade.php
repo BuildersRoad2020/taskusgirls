@@ -40,7 +40,16 @@
                     <td class="p-4 whitespace-nowrap"> {{$user->name}} </td>
                     <td class="p-4 whitespace-nowrap"> {{$user->email}} </td>
                     <td class="p-4 whitespace-nowrap"> @foreach ($user->RoleUser as $id)
-                        <span class="{{$id->roles_id == 1 ? 'bg-green-100 text-green-600 text-xs font-semibold rounded-2xl py-1 px-4 mr-2' : 'bg-pink-100 text-pink-600 text-xs font-semibold rounded-2xl py-1 px-4 mr-2' }}"> {{$id->roles_id == 1 ? 'Admin' : 'User' }} </span>
+
+                    @if ($id->roles_id == 1)
+                    <span class="bg-green-100 text-green-600 text-xs font-semibold rounded-2xl py-1 px-4 mr-2"> Admin </span>
+                    @endif
+                    @if ($id->roles_id == 2)
+                    <span class="bg-indigo-100 text-indigo-600 text-xs font-semibold rounded-2xl py-1 px-4 mr-2"> User </span>
+                    @endif
+                    @if ($id->roles_id == 3)
+                    <span class="bg-pink-100 text-pink-600 text-xs font-semibold rounded-2xl py-1 px-4 mr-2"> L2 </span>
+                    @endif
                         @endforeach
                     </td>
 
@@ -83,6 +92,7 @@
                     <select id="roles_id" class="form-multiselect block mt-1 w-full" multiple name="roles_id" required wire:model.defer="roles_id" />
                     <option value="1"> Admin </option>
                     <option value="2"> User </option>
+                    <option value="3"> L2 </option>
                     </select>
                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 mt-3"> You may select multiple roles</span>
                     <x-jet-input-error for="roles_id" class="mt-2" />
@@ -126,6 +136,7 @@
                     <select id="roles_id" class="form-multiselect block mt-1 w-full" multiple name="roles_id" required wire:model.defer="roles_id" />
                     <option value="1"> Admin </option>
                     <option value="2"> User </option>
+                    <option value="3"> L2 </option>
                     </select>
                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 mt-3"> You may select multiple roles</span>
                     <x-jet-input-error for="roles_id" class="mt-2" />
@@ -143,7 +154,11 @@
                 </x-jet-secondary-button>
 
             </x-slot>
-        </x-jet-dialog-modal>           
+        </x-jet-dialog-modal>       
+
+        <div class="mt-4" data-turbolinks="false">
+            {{ $users->links() }}
+        </div>    
 
     </div>
 

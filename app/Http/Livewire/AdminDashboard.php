@@ -16,7 +16,6 @@ use App\Models\SolutionType;
 use App\Models\TechnicianRequest;
 use App\Models\WarrantyRepair;
 use App\Models\User;
-use Facade\IgnitionContracts\Solution;
 use Livewire\WithPagination;
 
 class AdminDashboard extends Component
@@ -259,8 +258,7 @@ public $HRApplicationbind = false;
 
     public function confirmView($id)
     {
-       // dd($id);
-      //  dd($id);
+       dd($id);
        $this->View = $id;
        $caseID = Tasks::where('id', $id)->first();
 

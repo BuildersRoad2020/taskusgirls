@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
         ReplacementReasonSeeder::class,     
         DeviceTypeSeeder::class,    
         ApplicationSeeder::class,
-        SolutionTypeSeeder::class,        
+        SolutionTypeSeeder::class,    
+        SupportTypeSeeder::class,              
         ]);
     }
 }
