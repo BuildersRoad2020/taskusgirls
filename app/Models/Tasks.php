@@ -19,6 +19,7 @@ class Tasks extends Model
         'users_id', //owner
         'admin',
         'status',
+        'notes',
     ];
 
     public function User() {

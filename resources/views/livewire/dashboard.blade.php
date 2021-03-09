@@ -1217,6 +1217,7 @@
 
             <x-slot name="footer">
 
+ 
                 <x-jet-button class="ml-2" wire:click="TaskAdd()" wire:loading.attr="disabled">
                     {{ __('Add Task') }}
                 </x-jet-button>
@@ -1839,8 +1840,28 @@
                     </div>
                 </div>
                 @endif
+
+                @can('viewAny', App\Models\User::class)
+                <hr class="mt-2 mb-2">
+                <div class="px-2 w-auto">
+                        <x-jet-label for="adminnotes" value="{{ __('Admin Notes') }}" />
+                        <textarea rows="5" cols="42" class="mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" type="text" required wire:model.defer="adminnotes" /> </textarea>
+                        <x-jet-input-error for="adminnotes" class="mt-2" />
+                </div>
+
+
+                @endcan
             </x-slot>
-            <x-slot name="footer">
+
+  
+
+                <x-slot name="footer">
+                @can('viewAny', App\Models\User::class)
+                <x-jet-button class="ml-2" wire:click="UpdateNotes({{ $View}})" wire:loading.attr="disabled">
+                    {{ __('Add Notes') }}
+                 </x-jet-button>
+                @endcan
+
                 <x-jet-secondary-button wire:click="$set('View', false,)" wire:loading.attr="disabled">
                     {{ __('Close') }}
                 </x-jet-secondary-button>

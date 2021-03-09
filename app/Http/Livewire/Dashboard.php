@@ -41,6 +41,7 @@ class Dashboard extends Component
     public $confirmGrab = false;
     public $confirmDone = false;
     public $View = false;
+    public $adminnotes;
 
     protected $queryString = [  //to show query in url
         'status',
@@ -453,7 +454,31 @@ class Dashboard extends Component
       $this->users_id = User::where('id', $caseID->users_id)->pluck('name')->first();
       $this->casestatus = Tasks::where('id', $caseID->id)->pluck('status')->first(); 
       $this->admin_assigned = User::where('id', $caseID->admin)->pluck('name')->first();
+      $this->adminnotes = Tasks::where('id',$caseID->id)->pluck('Notes')->first();
 
+     // dd($this->adminnotes);
+
+    }
+
+    public function UpdateNotes(Tasks $id)
+    {
+        $this->authorize('viewAny', App\Models\User::class); 
+        $this->View = $id;
+        //$this->adminnotes = $id->Notes;
+
+        $validatedData = $this->validate([
+            'adminnotes' => 'required',
+        ]);
+
+        $notes = $this->View; 
+        $notes->Notes = $validatedData['adminnotes'];
+        $notes->save();
+
+        $this->reset('notes');
+        $this->View = false;
+        session()->flash('message', 'Notes added to Task');
+ 
+       
     }
 
     public function confirmingGrab($id) 
