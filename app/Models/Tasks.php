@@ -37,7 +37,7 @@ class Tasks extends Model
     public function identifyDuplicate() {
       
        $identifyDuplicate = DB::table('tasks')->wherein('casenumber', function ($query) {     
-       $query->select('casenumber')->from('tasks')->groupBy('casenumber')->havingRaw('COUNT(casenumber) > 1')->get();})->get()->pluck('casenumber');
+       $query->select('casenumber')->from('tasks')->where('status', '!=' ,4)->groupBy('casenumber')->havingRaw('COUNT(casenumber) > 1')->get();})->get()->pluck('casenumber');
           
       return $identifyDuplicate;
 

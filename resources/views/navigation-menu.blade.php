@@ -112,6 +112,13 @@
                                 </x-jet-dropdown-link>
                             @endif
 
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                {{ __('Admin Settings') }}
+                            </div>
+                            <x-jet-dropdown-link href="{{ route('archived') }}">
+                                {{ __('Archived Cases') }}
+                            </x-jet-dropdown-link>
+
                             <div class="border-t border-gray-100"></div>
 
                             <!-- Authentication -->
@@ -172,6 +179,10 @@
                 <!-- Account Management -->
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
+                </x-jet-responsive-nav-link>
+
+                <x-jet-responsive-nav-link href="{{ route('archived') }}" :active="request()->routeIs('archived')">
+                    {{ __('Archived Cases') }}
                 </x-jet-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
