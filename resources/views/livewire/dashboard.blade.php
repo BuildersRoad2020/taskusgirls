@@ -1841,16 +1841,14 @@
                 </div>
                 @endif
 
-                @can('viewAny', App\Models\User::class)
+               
                 <hr class="mt-2 mb-2">
                 <div class="px-2 w-auto">
                         <x-jet-label for="adminnotes" value="{{ __('Admin Notes') }}" />
                         <textarea rows="5" cols="42" class="mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" type="text" required wire:model.defer="adminnotes" /> </textarea>
                         <x-jet-input-error for="adminnotes" class="mt-2" />
                 </div>
-
-
-                @endcan
+              
             </x-slot>
 
   
