@@ -221,7 +221,6 @@ class Dashboard extends Component
             ->when($this->q, function ($query) {
                 return $query->where(function ($query) {
                     $query->where('casenumber', 'LIKE', '%' . $this->q . '%')->orwhere('store', 'LIKE', '%' . $this->q . '%');
-
                 });
             })
             ->when($this->status, function ($query) {
@@ -244,12 +243,7 @@ class Dashboard extends Component
                     $query->where('admin', 'LIKE', '%' . $this->admins . '%');
                 });
             })
-
             ->paginate('20');
-        //  dd($tasks);
-
-        //  $test = DB::table('tasks')->select('id','casenumber')->groupBy('casenumber')->havingRaw('COUNT(casenumber) > 1')->get();
-        // dd($test);
 
         return view('livewire.dashboard', [
             'tasks' => $tasks,
@@ -349,7 +343,53 @@ class Dashboard extends Component
        }
 
        if ($HRWT != null) {
-           
+
+        $id = SOwithTech::where('id', $HRWT)->first();
+
+        $this->sowithtechwarranty = $id->warranty;
+        $this->sowithtechquote = $id->quote;
+        $this->sowithtechdevice_disposal = $id->device_disposal;
+        $this->sowithtechdevice_name = $id->device_name;
+        $this->sowithtechdevice_type = DeviceType::where('id', $id->device_type)->pluck('name')->first();
+        $this->sowithtechLTstatus = $id->LTstatus;
+        $this->sowithtechissue = $id->issue;
+        $this->sowithtechreason = ReplacementReason::where('id', $id->reason)->pluck('name')->first();
+        $this->sowithtechconnection_type = $id->connection_type;
+        $this->sowithtechwifi_name = $id->wifi_name;
+        $this->sowithtechwifi_password = $id->wifi_password;
+        $this->sowithtechnetwork_type = $id->network_type;
+        $this->sowithtechIP = $id->IP;
+        $this->sowithtechsubnet = $id->subnet;
+        $this->sowithtechDG = $id->DG;
+        $this->sowithtechDNS = $id->DNS;
+        $this->sowithtechDNS2 = $id->DNS2;
+        $this->sowithtechSevenEleven = $id->SevenEleven;
+        $this->sowithtechstore_id = $id->store_id;
+        $this->sowithtechpostcode = $id->postcode;
+        $this->sowithtechpasscode = $id->passcode;
+        $this->sowithtechapplication = Application::where('id', $id->application)->pluck('name')->first();
+        $this->sowithtechmatrox = $id->matrox;
+        $this->sowithtechsolution_type = SolutionType::where('id', $id->solution_type)->pluck('name')->first();
+        $this->sowithtechorientation = $id->orientation;
+        $this->sowithtechscreen_model = $id->screen_model;
+        $this->sowithtechserial_number = $id->serial_number;
+        $this->sowithtechend = $id->end;
+        $this->sowithtechnetwork_device_type = $id->network_device_type;
+        $this->sowithtechprojector_model = $id->projector_model;
+        $this->sowithtechprojector_lamp = $id->projector_lamp;
+        $this->sowithtechnotes = $id->notes;
+        $this->sowithtechL2 = User::where('id', $id->L2)->pluck('name')->first();
+        $this->sowithtechperson = SiteAddress::where('id', $id->Address)->pluck('person')->first();
+        $this->sowithtechphone = SiteAddress::where('id', $id->Address)->pluck('phone')->first();
+        $this->sowithtechemail = SiteAddress::where('id', $id->Address)->pluck('email')->first();
+        $this->sowithtechaddress = SiteAddress::where('id', $id->Address)->pluck('address')->first();
+        $this->sowithtechsupport_types_id = SupportType::where('id', $id->support_types_id)->pluck('name')->first();
+    
+        $this->sowithtechtechs_required = $id->techs_required;
+        $this->sowithtechjob = $id->job;
+        $this->sowithtechtools = $id->tools;
+        $this->sowithtechdisplay_status = $id->display_status;
+    
 
        }
 
